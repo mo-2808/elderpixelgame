@@ -3,27 +3,35 @@ using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-
+    private Rigidbody2D body;
     public float speed;
-    private float move;
-    private Rigidbody2D rb;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Awake()
     {
-        rb= GetComponent<Rigidbody2D>();  
+        body = GetComponent<Rigidbody2D>();
     }
+
+
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
 
     // Update is called once per frame
-    void Update()
+
+
+    private void Update()
     {
-        move = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(move * speed, rb.linearVelocity.y);
+        body.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * speed, body.angularVelocity * speed, body.angularVelocity);
 
-       
-
-       
-        
-
-
+        if (Input.GetKey(KeyCode.Space))
+        {
+            body.linearVelocity = new Vector3(body.angularVelocity, speed, body.angularVelocity);
+        }
+            
     }
+      
+   
+
+
 }
